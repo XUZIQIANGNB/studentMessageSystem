@@ -8,7 +8,8 @@
             身份证号: IDCard 非空、str
             班级：cls 非空 str
         成员方法：
-            __init__ ：初始化函数，讲学生的信息插入
+            __init__ ：初始化函数，将学生的信息插入
+            addInformation： 完善学生的信息
 """
 
 class Student(object):
