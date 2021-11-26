@@ -121,7 +121,7 @@ def select_special_student(sql_special):
 
 def update_student(student):
     """
-    TODO 修改学生的信息，其中student.id做为修改的查询条件
+    修改学生的信息，其中student.id做为修改的查询条件
     :param student: 学生对象，其中id不能改变，其余信息为要修改的值
     :return: 受影响的数
     """
