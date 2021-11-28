@@ -11,7 +11,7 @@ def login(username, password):
     :return: Ture|False
     """
     # 连接数据库
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     # 获取一个游标
     cursor = connection.cursor()
     # 定义sql语句
@@ -33,9 +33,9 @@ def login(username, password):
 """
     此模块的测试
 """
-if __name__ == '__main__':
-    is_login = login('王坚', '14725')
-    if is_login:
-        print('登录成功')
-    else:
-        print('登录失败')
+# if __name__ == '__main__':
+#     is_login = login('王坚', '147258')
+#     if is_login:
+#         print('登录成功')
+#     else:
+#         print('登录失败')

@@ -13,7 +13,7 @@ def add_student(student):
     # 插入学生的id必须为空
     if student.id is not None:
         return 0
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     sql = """insert into student(name ,age, gender, cls) values (?,?,?,?)"""
     cursor = connection.cursor()
     cursor.execute(sql, (student.name, student.age, student.gender, student.cls))
@@ -33,7 +33,7 @@ def delete_student(id):
     # 简单的数据校验
     if isinstance(id, int) is not True and id <= 0:
         return 0
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     cursor = connection.cursor()
     sql = """delete from student where id = ?"""
     cursor.execute(sql, (id,))
@@ -52,7 +52,7 @@ def select_one_student(id):
     # 简单校验
     if isinstance(id, int) is not True and id <= 0:
         return
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     cursor = connection.cursor()
     sql = "select id, name, age, gender, cls from student where id = ?"
     cursor.execute(sql, (id, ))
@@ -62,18 +62,18 @@ def select_one_student(id):
     connection.close()
     # print(result[0])
     # 判断结果
-    if result is None:
+    if len(result) == 0:
         return None
     else:
         id, name, age, gender, cls = result[0]
         student = Student(id=id, name=name, age=age, gender=gender, cls=cls)
-        print(student.getmessage())
+        return student
 def select_all_student():
     """
     查询student表中的所有信息，并将其封装为列表
     :return:list(Student)
     """
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     cursor = connection.cursor()
     sql = "select id, name, age, gender, cls from student"
     cursor.execute(sql)
@@ -99,11 +99,11 @@ def select_special_student(sql_special):
     """
     if sql_special is None:
         return None
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
 
     cursor = connection.cursor()
     # 这里使用了sql拼接，可能会存在sql注入
-    sql = "select id, name, age, gender, cls from student where "+sql_special
+    sql = "select id, name, age, gender, cls from student where "+str(sql_special)
     cursor.execute(sql)
     result = cursor.fetchall()
     if result is None:
@@ -112,7 +112,6 @@ def select_special_student(sql_special):
     for student_tuple in result:
         id, name, age, gender, cls = student_tuple
         student = Student(id=id, name=name, age=age, gender=gender, cls=cls)
-        print(student.getmessage())
         student_list.append(student)
     # 关闭连接
     cursor.close()
@@ -127,9 +126,9 @@ def update_student(student):
     """
     if student.id is None:
         return 0
-    connection = sqlite3.connect(r'../sqlite/student_system.db')
+    connection = sqlite3.connect(r'sqlite/student_system.db')
     cursor = connection.cursor()
-    sql = "update student set name=? and age = ? and gender = ? and cls = ? where id = ?"
+    sql = "update student set name=? , age = ? , gender = ? , cls = ? where id = ?"
     cursor.execute(sql, (student.name, student.age, student.gender, student.cls, student.id))
     # 关闭连接，提交事务
     cursor.close()

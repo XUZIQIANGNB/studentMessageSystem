@@ -14,7 +14,7 @@
 
 class Student(object):
     # 初始化函数  管理员创建出学生的名字、班级
-    def __init__(self, name, cls, gender=None, age=None, id=None):
+    def __init__(self, name=None, cls=None, gender=None, age=None, id=None):
         self.id = id
         self.name = name
         self.cls = cls
