@@ -5,10 +5,11 @@ from controller.StudentController import *
 from controller.AdminController import *
 
 from PySide2.QtWidgets import QApplication, QWidget, QPlainTextEdit, QLineEdit, QMessageBox, QTableWidget, \
-    QTableWidgetItem
+    QTableWidgetItem, QFileDialog
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtCore import QFile, Qt
 from PySide2.QtGui import QIcon
+
 
 class views:
     pass
@@ -20,6 +21,10 @@ class Login(QWidget):
         qtmp.open(QFile.ReadOnly)
         qtmp.close()
         self.ui = QUiLoader().load(qtmp)
+        # 设置程序的图标
+        app_icon = QIcon('view/logo.ico')
+        self.ui.setWindowIcon(app_icon)
+        self.ui.username.setFocus()
         # 添加按钮的点击事件
         self.ui.login.clicked.connect(self.login_view)
     def login_view(self):
@@ -47,20 +52,50 @@ class Min:
         qtmp.open(QFile.ReadOnly)
         qtmp.close()
         self.ui = QUiLoader().load(qtmp)
+        # 设置程序的图标
+        app_icon = QIcon('view/logo.ico')
+        self.ui.setWindowIcon(app_icon)
         # 查询所有的学生信息并显示
-        student_list = select_all_controller_student()
+        self.student_list = select_all_controller_student()
         # 将表格中的数据清空，并显示student_list数据
-        self.show_list(student_list)
+        self.show_list()
         # 为删除按钮添加点击事件
         self.ui.delete_btn.clicked.connect(self.delete_selected)
         # 为查询按钮添加点击事件
         self.ui.find_student.clicked.connect(self.find_student)
         # 为退出按钮添加事件
         self.ui.exit.clicked.connect(self.exit_win)
+        # 为导入按钮添加点击事件
+        self.ui.btn_in.clicked.connect(self.fileDialog)
+        # 为导出按钮添加点击事件
+        self.ui.btn_out.clicked.connect(self.export)
+    # 导出
+    def export(self):
+        # print(self.student_list)
+        if not self.student_list:
+            QMessageBox.warning(self.ui, '警告', '导出数据为空')
+            return
+        filepath = QFileDialog.getExistingDirectory(self.ui, '请选择到导出的目录')
+        if export_controller_student(filepath, self.student_list) is True:
+            QMessageBox.information(self.ui, '成功', '导出成功')
+    # 导入
+    def fileDialog(self):
+        filepath = QFileDialog.getOpenFileName(self.ui, "选择要导入的文件", filter="XLS 工作表 (*.xls)")
+        if filepath == '' or filepath[0] == '':
+            QMessageBox.critical(self.ui, '错误', '未选择文件')
+        else:
+            if add_list_controller_student(filepath[0]) is False:
+                QMessageBox.critical(self.ui, '错误', '导入数据失败')
+            else:
+                QMessageBox.information(self.ui, '成功', '导入数据成功')
+                # 成功的话 重新刷新
+                self.student_list = select_all_controller_student()
+                self.show_list()
+
 
     def exit_win(self):
-        views.login.ui.close()
         views.Main.ui.close()
+        views.login.ui.show()
     def find_student(self):
         # 获取到输入框的内容
         input_id = self.ui.input_num.text()
@@ -74,9 +109,9 @@ class Min:
             if student is None:
                 QMessageBox.warning(self.ui, '警告', '查无此人')
             else:
-                student_list = []
-                student_list.append(student)
-                self.show_list(student_list)
+                self.student_list = []
+                self.student_list.append(student)
+                self.show_list()
         else:
             # 进行模糊查询
             sql = ''
@@ -89,22 +124,27 @@ class Min:
             if input_cls != '':
                 sql += f"cls = '{input_cls}' and "
             if len(sql) == 0:
-                QMessageBox.warning(self.ui, '警告', '为输入查询内容')
+                QMessageBox.warning(self.ui, '警告', '未输入查询内容')
+                # 未输入任何内容，则为刷新
+                self.student_list = select_all_controller_student()
+                self.show_list()
             sql = sql[:-5]
-            student_list = select_special_controller_student(sql)
-            if student_list is None:
+            self.student_list = select_special_controller_student(sql)
+            if self.student_list is None:
                 QMessageBox.warning(self.ui, '警告', '查无此人')
-            self.show_list(student_list)
+            self.show_list()
     # 删除选中
     def delete_selected(self):
         ids = self.getSelected()
+        if ids[len(ids)-1] == '':
+            ids.remove('')
         for delete_id in ids:
             if delete_controller_student(int(delete_id)) != 1:
                 QMessageBox.critical(self.ui, '错误', '删除失败')
                 return
         # 刷新表格
-        student_list = select_all_controller_student()
-        self.show_list(student_list)
+        self.student_list = select_all_controller_student()
+        self.show_list()
 
     def getSelected(self):
         select_all = self.ui.table.selectedIndexes()
@@ -122,9 +162,6 @@ class Min:
     def cfgItemChanged(self, row, column):
         # 获取更改内容
         try:
-            # 判断用户点击的是不是最后一行
-            # print(row, self.ui.table.rowCount())
-
             stu_id = self.ui.table.item(row, 0).text()  # 首列为配置名称
             update_name = self.ui.table.item(row, 1).text()
             update_age = self.ui.table.item(row, 2).text()
@@ -138,8 +175,8 @@ class Min:
                     QMessageBox.critical(self.ui, '错误', '添加失败')
                 else:
                     # 添加成功
-                    student_list = select_all_controller_student()
-                    self.show_list(student_list)
+                    self.student_list = select_all_controller_student()
+                    self.show_list()
             else:
                 # 封装成对象
                 student = Student(id=stu_id, name=update_name, gender=update_gender, age=update_age, cls=update_cls)
@@ -149,12 +186,12 @@ class Min:
                     QMessageBox.critical(self.ui, '错误', '修改失败')
         except:
             pass
-    def show_list(self, student_list):
+    def show_list(self):
         # 将列表清空
         self.ui.table.clearContents()
         self.ui.table.setRowCount(0)
         # self.ui.QTableWidget.
-        for index, student in enumerate(student_list):
+        for index, student in enumerate(self.student_list):
             stu_id = QTableWidgetItem()
             stu_name = QTableWidgetItem()
             stu_age = QTableWidgetItem()
@@ -180,17 +217,18 @@ class Min:
         # 为表格添加修改事件
         # 插入一行空列表，用于添加学生信息
         # print(len(student_list)+1)
-        self.ui.table.insertRow(len(student_list))
+        self.ui.table.insertRow(len(self.student_list))
         # 设置第一列不能修改
         item = QTableWidgetItem('')
         item.setFlags(Qt.ItemIsEnabled)  # 参数名字段不允许修改
-        self.ui.table.setItem(len(student_list), 0, item)
+        self.ui.table.setItem(len(self.student_list), 0, item)
         self.ui.table.cellChanged.connect(self.cfgItemChanged)
 
 if __name__ == '__main__':
     app = QApplication([])
     views.login = Login()
     views.Main = Min()
+    # views.Main.ui.show()
     views.login.ui.show()
     app.exec_()
 
