@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1086</width>
+    <height>742</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>学生信息管理系统</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QLabel{
+	font-size:20px;
+	font-weight: bold;
+}
+QTableWidget {
+	border:1px solid green;
+    gridline-color: rgb(71, 191, 255);
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;查询&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(235,235,235)</string>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideMiddle</enum>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>操作</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="frame">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3" stretch="3,1,7">
+           <item>
+            <widget class="QFrame" name="frame_2">
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_8">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout">
+                  <item>
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>学号:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="input_num">
+                    <property name="styleSheet">
+                     <string notr="true">border:1px solid block;
+width:60px;
+height:30px;
+background-color:#fff;</string>
+                    </property>
+                    <property name="placeholderText">
+                     <string>请输入学号</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <item>
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>姓名:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="input_name">
+                    <property name="styleSheet">
+                     <string notr="true">border:1px solid block;
+width:60px;
+height:30px;
+background-color:#fff;</string>
+                    </property>
+                    <property name="placeholderText">
+                     <string>请输入姓名</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <item>
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>年龄:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="input_age">
+                    <property name="styleSheet">
+                     <string notr="true">border:1px solid block;
+width:60px;
+height:30px;
+background-color:#fff;</string>
+                    </property>
+                    <property name="placeholderText">
+                     <string>请输入年龄</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="0,0">
+                  <property name="leftMargin">
+                   <number>30</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>30</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="label_4">
+                    <property name="text">
+                     <string>性别:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QComboBox" name="input_gender">
+                    <property name="styleSheet">
+                     <string notr="true">background-color:#fff;
+
+font-size:20px;
+height:30px;</string>
+                    </property>
+                    <item>
+                     <property name="text">
+                      <string/>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>男</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
+                      <string>女</string>
+                     </property>
+                    </item>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_7">
+                  <item>
+                   <widget class="QLabel" name="label_5">
+                    <property name="text">
+                     <string>班级:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="input_cls">
+                    <property name="styleSheet">
+                     <string notr="true">border:1px solid block;
+width:60px;
+height:30px;
+background-color:#fff;</string>
+                    </property>
+                    <property name="placeholderText">
+                     <string>请输入班级</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_9">
+                <item>
+                 <widget class="QPushButton" name="find_student">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>方正舒体</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:blue;</string>
+                  </property>
+                  <property name="text">
+                   <string>查询</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="delete_btn">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>方正舒体</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:blue;</string>
+                  </property>
+                  <property name="text">
+                   <string>删除</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="btn_in">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>方正舒体</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:blue;</string>
+                  </property>
+                  <property name="text">
+                   <string>导入</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="btn_out">
+                  <property name="minimumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>100</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>方正舒体</family>
+                    <pointsize>14</pointsize>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">color:blue;</string>
+                  </property>
+                  <property name="text">
+                   <string>导出</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_3">
+             <property name="styleSheet">
+              <string notr="true">setColumnWidth: 0px, 11px;
+setRowHeight: 40px;</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="Line" name="line">
+                <property name="styleSheet">
+                 <string notr="true">height:2px</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_4">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QTableWidget" name="table">
+                <property name="styleSheet">
+                 <string notr="true">font-size:20px;</string>
+                </property>
+                <property name="gridStyle">
+                 <enum>Qt::DotLine</enum>
+                </property>
+                <attribute name="horizontalHeaderStretchLastSection">
+                 <bool>true</bool>
+                </attribute>
+                <column>
+                 <property name="text">
+                  <string>学号</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="background">
+                  <color>
+                   <red>218</red>
+                   <green>218</green>
+                   <blue>218</blue>
+                  </color>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>姓名</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>年龄</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>性别</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>班级</string>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>18</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>其他</string>
+       </attribute>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>11</x>
+          <y>11</y>
+          <width>1021</width>
+          <height>471</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_11">
+         <property name="leftMargin">
+          <number>425</number>
+         </property>
+         <property name="rightMargin">
+          <number>344</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>团队：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_7">
+             <property name="styleSheet">
+              <string notr="true">color:red;
+font-size:28px;</string>
+             </property>
+             <property name="text">
+              <string>第4组</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_23">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_19">
+             <property name="text">
+              <string>组长：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_20">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>蔡申傲</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_35">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_30">
+             <property name="text">
+              <string>组员1：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_31">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>龚起源</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_36">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_32">
+             <property name="text">
+              <string>组员2：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_33">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>水俊洋</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_37">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_34">
+             <property name="text">
+              <string>组员3：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_35">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>王凯</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_38">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_36">
+             <property name="text">
+              <string>组员4：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_37">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>张雪璞</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_39">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_38">
+             <property name="text">
+              <string>组员5：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_39">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>林成海</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_40">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_40">
+             <property name="text">
+              <string>组员6：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_41">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>张辉</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_41">
+           <property name="rightMargin">
+            <number>88</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="label_42">
+             <property name="text">
+              <string>组员7：</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_43">
+             <property name="styleSheet">
+              <string notr="true">color:blue;</string>
+             </property>
+             <property name="text">
+              <string>冯警超</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>540</y>
+          <width>202</width>
+          <height>42</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_42" stretch="0,1">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="exit">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>60</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:red;</string>
+           </property>
+           <property name="text">
+            <string>退出</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCommandLinkButton" name="commandLinkButton">
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>42</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>项目源码</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
