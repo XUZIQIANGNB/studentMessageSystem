@@ -1,0 +1,57 @@
+# 学生信息管理系统
+## 数据库持久化
+1. 使用`SQLite3`创建学生信息管理系统所需数据表的数据库：`student_system`数据库
+2. 创建学生表，对项目中的学生信息进行存储
+```sqlite
+-- 学生表
+create table student_system.student(
+    id integer primary key autoincrement, -- 学号 int类型、主键、自增
+    name text not null ,                  -- 学生姓名 name str类型、非空
+    age integer default 0,             -- 学生年龄 age int类型、默认为0
+    gender text default '男',           -- 学生性别 gender str类型、默认为男
+    cls text not null                   -- 学生所属班级  cls str类型、非空
+);
+```
+因为项目有登录的需求，所以创建一张管理员表
+```sqlite
+-- 管理员表
+create table student_system.admin(
+    username text not null,     -- 账号
+    password text not null      -- 密码
+);
+```
+3. 项目不需要添加管理员，管理员账号、密码的添加由管理人员代码添加
+## 包介绍
+### DAO包
+负责将 
+1.python字典对象映射为SQLite3中表的各个字段信息
+2.将SQLite3中保存的数据映射为python字典对象
+#### StudentMapper.py实现功能介绍
+大致功能：
+* `add_student(Student:student)-> None`:将传入的student字典对象添加到student表中
+* `delete_student(int:student.id)-> None`: 根据学生的id删除学生信息
+* `select_one_student(int:student.id) -> student`: 根据学生的id，查找学生信息，并将查找到的学生信息封装为Student对象
+* `select_all_student() -> list(Student)`:将student所有数据封装为Student类型的列表
+* `select_special_student(str:sql_special) -> list(Student)`:对student表进行特殊查询，根据传入的sql_special(where的条件)
+* `update_student(Student:student)-> None`: student.id做为判断条件，将对象中的信息更新到student表中
+#### StudentMapper.py功能介绍
+* `login(username,password): -> True|False`: 对管理员输入的账号和密码进行校验
+## entry包
+    因为项目很小，管理就只是登录功能实现的时候用到了，所以不单独定义对象。
+    进定义学生的实体类`Student`
+### student.py介绍
+    对数据库中student表中的字段进行映射
+    `__init(self, id, name, age, gende, cls)`:初始化对象，将学生的基本信息封装为对象
+    `get_message()->str`:将student对象中各个变量拼接并返回
+## sqlite
+此文件夹中存放的是SQLite数据库，存放的是学生信息持久化所需的数据
+## view
+存放的是用QT设计师制作的UI界面
+## main.py
+程序的主入口，调用其他包的功能，实现整个项目
+
+
+## controller层介绍
+### StudentController.py
+
+### AdminController.py
